@@ -1,0 +1,22 @@
+{
+  "name": "sending-emails-with-express-mailer-gmail-smtp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "mailer"
+  ],
+  "author": "ma",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.14.0",
+    "pug": "^2.0.4",
+    "sendgrid": "^5.2.3"
+  }
+}
