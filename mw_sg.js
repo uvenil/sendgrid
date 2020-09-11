@@ -46,6 +46,7 @@ const sendg = json => {
     console.log("mail status code: ", response.statusCode);
     console.log("body: ", response.body);
     console.log("headers: ", response.headers);
+    console.log("req.body: ", json);
   })
   .catch(error => {
     //error is an instance of SendGridError
