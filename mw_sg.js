@@ -3,7 +3,6 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
 }
 
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-const {reqobj, requestTime} = require('./middleware')()
 
 const getsgreq = ({from, to, subject, title, aktie, zeit, kurs, ...rest}) => ({ // get sendgrid request with json-content
   method: 'POST',
@@ -55,6 +54,9 @@ const sendg = json => {
   });
 }
 
-const sgmw =  (req, res, next) => sendg(req.body)  // send email with body
+const sgmw =  (req, res, next) => {
+  sendg(req.body)  // send email with body
+  next()
+}
 
 module.exports = sgmw
