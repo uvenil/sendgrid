@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-f
 app.use(bodyParser.json())  // parse application/json
 
 app.use('/info', [requestTime, reqobj])
-// app.use('/mail', sgmw);
+app.use('/mail', sgmw);
 app.use('/mail', [requestTime, reqobj, answer]);
 app.use(end);
 
