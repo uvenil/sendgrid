@@ -11,7 +11,7 @@ module.exports = options => ({
     const {baseUrl, body, fresh, hostname, ip, ips, method, originalUrl, params, path, query, requestTime, secure, stale, subdomains, xhr} = req
     ro = {baseUrl, body, fresh, hostname, ip, ips, method, originalUrl, params, path, query, requestTime, secure, stale, subdomains, xhr}
     console.log(ro)
-    res.send(JSON.stringify(ro))
+    // res.send(JSON.stringify(ro))
     next()
   },
 

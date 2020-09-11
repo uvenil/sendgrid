@@ -3,7 +3,8 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
 }
 
 const express = require('express');
-const {answer, end, reqobj, requestTime} = require('./middleware01')()
+// const {answer, end, reqobj, requestTime} = require('./alt/middleware01')()
+const {answer, end, reqobj, requestTime} = require('./middleware')()
 const sgmw = require('./mw_sg')
 const bodyParser = require('body-parser')
 const cors = require("cors");

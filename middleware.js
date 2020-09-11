@@ -9,10 +9,10 @@ module.exports = options => ({
 
   reqobj: (req, res, next) => {
     const {baseUrl, body, fresh, hostname, ip, ips, method, originalUrl, params, path, query, requestTime, secure, stale, subdomains, xhr} = req
-    ro = {baseUrl, body, fresh, hostname, ip, ips, method, originalUrl, params, path, query, requestTime, secure, stale, subdomains, xhr}
-    console.log(ro)
+    reqvars = {baseUrl, body, fresh, hostname, ip, ips, method, originalUrl, params, path, query, requestTime, secure, stale, subdomains, xhr}
+    console.log({reqvars})
     res.return = !res.return? {}: res.return
-    res.return = {resobj: ro, ...res.return}
+    res.return = {reqvars, ...res.return}
     next()
   },
 
@@ -24,13 +24,14 @@ module.exports = options => ({
   answer: (req, res, next) => { // return req.body
     console.log('request method: ', req.method);
     res.setHeader('Content-Type', 'text/plain')
-    res.write('you posted and sent by mail:\n')
     res.return = !res.return? {}: res.return
     res.return = {reqbody: req.body, ...res.return}
     console.log("res.return: ", res.return)
     next()
   },
   
-  end: (req, res, next) => res.end(JSON.stringify(res.return, null, 2))
-  // end: (req, res, next) => res.end("res.return: " + JSON.stringify(res.return))
+  end: (req, res, next) => {
+    // res.write('you posted and sent by mail:\n')
+    res.end(JSON.stringify(res.return, null, 2))
+  }
 })
