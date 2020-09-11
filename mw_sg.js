@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 const {reqobj, requestTime} = require('./middleware')()
 
-const getsgreq = json => ({ // get sendgrid request with json-content
+const getsgreq = ({from, to, subject, title, aktie, zeit, kurs, ...rest}) => ({ // get sendgrid request with json-content
   method: 'POST',
   path: '/v3/mail/send',
   body: {
@@ -13,19 +13,26 @@ const getsgreq = json => ({ // get sendgrid request with json-content
       {
         to: [
           {
-            email: process.env.EMAIL_TO,
+            email: to || process.env.EMAIL_TO,
           },
         ],
-        subject: 'JSON Hook!',
+        subject: subject || 'Hook von Tradeview!',
       },
     ],
     from: {
-      email: process.env.EMAIL_FROM,
+      email: from || process.env.EMAIL_FROM,
     },
     content: [
       {
         type: 'text/html',
-        value: JSON.stringify(json),
+        // value: JSON.stringify(json),
+        value: `
+        <h2>${title || "Alarm"}</h2>
+        <p>Zeit: ${zeit}</p>
+        <p>Aktie: ${aktie}</p>
+        <p>Kurs: ${kurs}</p>
+        <p>${JSON.stringify(rest)}</p>
+        `,
       },
     ],
   },
